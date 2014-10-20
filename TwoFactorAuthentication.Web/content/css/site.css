@@ -1,38 +1,29 @@
 ﻿/* Sticky footer styles
 -------------------------------------------------- */
 html {
-    position: relative;
     min-height: 100%;
+    position: relative;
 }
 
-body {
-    /* Margin bottom by footer height */
+body { /* Margin bottom by footer height */
     margin-bottom: 60px;
-      padding-top: 40px;
-  xpadding-bottom: 10px;
+    padding-bottom: 10px;
+    padding-top: 40px;
 }
-
-
 
 #footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
     background-color: rgb(55, 90, 127);
+    bottom: 0; /* Set the fixed height of the footer here */
+    height: 60px;
+    position: absolute;
+    width: 100%;
 }
 
-.text-muted {
-    margin: 20px 0;
+.text-muted { margin: 20px 0; }
+
+.form-control input[type="text"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-bottom: 5px !important;
+    margin-top: 5px;
 }
-
-
-
-    .form-control input[type="text"] {
-        margin-top:5px;
-        margin-bottom: 5px  !important;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-

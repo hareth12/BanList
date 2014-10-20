@@ -1,39 +1,38 @@
 ﻿'use strict';
-app.factory('authInterceptorService', ['$q', '$injector','$location', 'localStorageService', function ($q, $injector,$location, localStorageService) {
+app.factory('authInterceptorService', [
+    '$q', '$injector', '$location', 'localStorageService', function($q, $injector, $location, localStorageService) {
 
-    var authInterceptorServiceFactory = {};
+        var authInterceptorServiceFactory = {};
 
-    var _request = function (config) {
+        var request = function(config) {
 
-        config.headers = config.headers || {};
-       
-        var authData = localStorageService.get('authorizationTFAData');
-        if (authData) {
-            config.headers.Authorization = 'Bearer ' + authData.token;
-        }
+            config.headers = config.headers || {};
 
-        return config;
-    }
-
-    var _responseError = function (rejection) {
-        if (rejection.status === 401) {
-
-            if ((rejection.data.code) && (rejection.data.code = 100))
-            {
-                //Case that OTP is not valid but access token is valid
-                return $q.reject(rejection);
+            var authData = localStorageService.get('authorizationTFAData');
+            if (authData) {
+                config.headers.Authorization = 'Bearer ' + authData.token;
             }
 
-            var authService = $injector.get('authService');
-  
-            authService.logOut();
-            $location.path('/login');
-        }
-        return $q.reject(rejection);
+            return config;
+        };
+        var responseError = function(rejection) {
+            if (rejection.status === 401) {
+
+                if ((rejection.data.code) && (rejection.data.code = 100)) {
+                    //Case that OTP is not valid but access token is valid
+                    return $q.reject(rejection);
+                }
+
+                var authService = $injector.get('authService');
+
+                authService.logOut();
+                $location.path('/login');
+            }
+            return $q.reject(rejection);
+        };
+        authInterceptorServiceFactory.request = request;
+        authInterceptorServiceFactory.responseError = responseError;
+
+        return authInterceptorServiceFactory;
     }
-
-    authInterceptorServiceFactory.request = _request;
-    authInterceptorServiceFactory.responseError = _responseError;
-
-    return authInterceptorServiceFactory;
-}]);
+]);

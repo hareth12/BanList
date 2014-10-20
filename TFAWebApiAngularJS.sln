@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoFactorAuthentication.API", "TwoFactorAuthentication.API\TwoFactorAuthentication.API.csproj", "{2BA6FEB0-81A0-4FAE-9B6B-18071F854A46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoFactorAuthentication.Web", "TwoFactorAuthentication.Web\TwoFactorAuthentication.Web.csproj", "{00CB9075-3DB3-4633-B6E8-478433D6F9D8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2BA6FEB0-81A0-4FAE-9B6B-18071F854A46} = {2BA6FEB0-81A0-4FAE-9B6B-18071F854A46}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

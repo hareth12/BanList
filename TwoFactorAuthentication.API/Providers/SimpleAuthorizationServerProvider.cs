@@ -1,32 +1,23 @@
-﻿using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 
 namespace TwoFactorAuthentication.API.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
-        {
-            context.Validated();
-            return Task.FromResult<object>(null);
-        }
-
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var  allowedOrigin = "*";
-            ApplicationUser appUser = null;
+            const string allowedOrigin = "*";
+            ApplicationUser appUser;
 
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedOrigin});
 
-            using (AuthRepository _repo = new AuthRepository())
+            using (var repo = new AuthRepository())
             {
-                 appUser = await _repo.FindUser(context.UserName, context.Password);
+                appUser = await repo.FindUser(context.UserName, context.Password);
 
                 if (appUser == null)
                 {
@@ -38,14 +29,10 @@ namespace TwoFactorAuthentication.API.Providers
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
-            identity.AddClaim(new Claim("PSK", appUser.PSK));
+            identity.AddClaim(new Claim("PSK", appUser.Psk));
 
-            var props = new AuthenticationProperties(new Dictionary<string, string>
-                {
-                    { 
-                        "userName", context.UserName
-                    }
-                });
+            var props = new AuthenticationProperties(
+                new Dictionary<string, string> {{"userName", context.UserName}});
 
             var ticket = new AuthenticationTicket(identity, props);
             context.Validated(ticket);
@@ -53,12 +40,17 @@ namespace TwoFactorAuthentication.API.Providers
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
-
-            foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
+            foreach (var property in context.Properties.Dictionary)
             {
                 context.AdditionalResponseParameters.Add(property.Key, property.Value);
             }
 
+            return Task.FromResult<object>(null);
+        }
+
+        public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+        {
+            context.Validated();
             return Task.FromResult<object>(null);
         }
     }

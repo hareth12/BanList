@@ -1,7 +1,7 @@
 ﻿
 var app = angular.module('AngularAuthApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
 
-app.config(function ($routeProvider) {
+app.config(function($routeProvider) {
 
     $routeProvider.when("/home", {
         controller: "homeController",
@@ -39,12 +39,12 @@ app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase
 });
 
-app.config(function ($httpProvider) {
+app.config(function($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-app.run(['authService', function (authService) {
-    authService.fillAuthData();
-}]);
-
-
+app.run([
+    'authService', function(authService) {
+        authService.fillAuthData();
+    }
+]);

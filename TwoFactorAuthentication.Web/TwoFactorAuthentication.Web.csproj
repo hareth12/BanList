@@ -57,13 +57,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\css\paper.min.css" />
+    <Content Include="content\fonts\fontawesome-webfont.svg" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="content\fonts\fontawesome-webfont.eot" />
     <Content Include="content\fonts\fontawesome-webfont.ttf" />
     <Content Include="content\fonts\fontawesome-webfont.woff" />
     <Content Include="content\fonts\FontAwesome.otf" />
-    <Content Include="content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Properties\PublishProfiles\ngTFAWeb.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -88,12 +90,10 @@
     <Content Include="app\views\transferMoney.html" />
     <Content Include="app\views\transhistory.html" />
     <Content Include="app\views\signup.html" />
-    <Content Include="content\css\darkly.bootstrap.min.css" />
     <Content Include="content\css\font-awesome.min.css" />
     <Content Include="content\css\loading-bar.css" />
     <Content Include="content\css\loading-bar.min.css" />
     <Content Include="content\css\site.css" />
-    <Content Include="content\fonts\fontawesome-webfont.svg" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-local-storage.min.js" />
@@ -118,7 +118,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61117</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61117/</IISUrl>
+          <IISUrl>http://localhost:61117</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

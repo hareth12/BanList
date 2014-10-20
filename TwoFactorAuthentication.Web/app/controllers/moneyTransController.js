@@ -1,14 +1,16 @@
 ﻿'use strict';
-app.controller('moneyTransController', ['$scope', 'moneyTransService', function ($scope, moneyTransService) {
+app.controller('moneyTransController', [
+    '$scope', 'moneyTransService', function($scope, moneyTransService) {
 
-    $scope.transactionsHistory = [];
+        $scope.transactionsHistory = [];
 
-    moneyTransService.getHistory().then(function (results) {
+        moneyTransService.getHistory().then(function(results) {
 
-        $scope.transactionsHistory = results.data;
+            $scope.transactionsHistory = results.data;
 
-    }, function (error) {
-        //alert(error.data.message);
-    });
+        }, function(error) {
+            //alert(error.data.message);
+        });
 
-}]);
+    }
+]);

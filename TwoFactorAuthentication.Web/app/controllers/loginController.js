@@ -1,23 +1,25 @@
 ﻿'use strict';
-app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', function ($scope, $location, authService, ngAuthSettings) {
+app.controller('loginController', [
+    '$scope', '$location', 'authService', 'ngAuthSettings', function($scope, $location, authService, ngAuthSettings) {
 
-    $scope.loginData = {
-        userName: "",
-        password: ""
-    };
+        $scope.loginData = {
+            userName: "",
+            password: ""
+        };
 
-    $scope.message = "";
+        $scope.message = "";
 
-    $scope.login = function () {
+        $scope.login = function() {
 
-        authService.login($scope.loginData).then(function (response) {
+            authService.login($scope.loginData).then(function(response) {
 
-            $location.path('/transhistory');
+                    $location.path('/transhistory');
 
-        },
-         function (err) {
-             $scope.message = err.error_description;
-         });
-    };
+                },
+                function(err) {
+                    $scope.message = err.error_description;
+                });
+        };
 
-}]);
+    }
+]);

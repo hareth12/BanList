@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using TwoFactorAuthentication.API.Models;
 
 namespace TwoFactorAuthentication.API.Controllers
@@ -12,11 +8,11 @@ namespace TwoFactorAuthentication.API.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private AuthRepository _repo = null;
+        private readonly AuthRepository repo;
 
         public AccountController()
         {
-            _repo = new AuthRepository();
+            repo = new AuthRepository();
         }
 
         // POST api/Account/Register
@@ -29,8 +25,8 @@ namespace TwoFactorAuthentication.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await _repo.RegisterUser(userModel);
-            
+            IdentityResult result = await repo.RegisterUser(userModel);
+
             IHttpActionResult errorResult = GetErrorResult(result);
 
             if (errorResult != null)
@@ -38,16 +34,16 @@ namespace TwoFactorAuthentication.API.Controllers
                 return errorResult;
             }
 
-            ApplicationUser user = await _repo.FindUser(userModel.UserName, userModel.Password);
+            ApplicationUser user = await repo.FindUser(userModel.UserName, userModel.Password);
 
-            return Ok(new { PSK = user.PSK });
+            return Ok(new {PSK = user.Psk});
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _repo.Dispose();
+                repo.Dispose();
             }
 
             base.Dispose(disposing);
@@ -60,26 +56,25 @@ namespace TwoFactorAuthentication.API.Controllers
                 return InternalServerError();
             }
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
             {
-                if (result.Errors != null)
+                return null;
+            }
+            if (result.Errors != null)
+            {
+                foreach (string error in result.Errors)
                 {
-                    foreach (string error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
+                    ModelState.AddModelError("", error);
                 }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return BadRequest();
-                }
-
-                return BadRequest(ModelState);
             }
 
-            return null;
+            if (ModelState.IsValid)
+            {
+                // No ModelState errors are available to send, so just return an empty BadRequest.
+                return BadRequest();
+            }
+
+            return BadRequest(ModelState);
         }
     }
 }

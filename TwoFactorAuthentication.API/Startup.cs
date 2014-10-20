@@ -1,12 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using System;
+using System.Web.Http;
+using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using TwoFactorAuthentication.API.App_Start;
 using TwoFactorAuthentication.API.Providers;
 
 namespace TwoFactorAuthentication.API
@@ -15,21 +12,20 @@ namespace TwoFactorAuthentication.API
     {
         public void Configuration(IAppBuilder app)
         {
-            HttpConfiguration config = new HttpConfiguration();
+            var config = new HttpConfiguration();
 
             ConfigureOAuth(app);
 
             WebApiConfig.Register(config);
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(config);
-
         }
 
         public void ConfigureOAuth(IAppBuilder app)
         {
-            OAuthBearerAuthenticationOptions OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+            var oauthBearerOptions = new OAuthBearerAuthenticationOptions();
 
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            var oauthServerOptions = new OAuthAuthorizationServerOptions
             {
                 //For Dev enviroment only (on production should be AllowInsecureHttp = false)
                 AllowInsecureHttp = true,
@@ -39,11 +35,10 @@ namespace TwoFactorAuthentication.API
             };
 
             // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthAuthorizationServer(oauthServerOptions);
 
             //Token Consumption
-            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
-
+            app.UseOAuthBearerAuthentication(oauthBearerOptions);
         }
     }
 }
