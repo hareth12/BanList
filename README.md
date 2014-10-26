@@ -1,6 +1,6 @@
 AngularJS Two Factor Authentication using ASP.NET Web API, Microsoft.Owin, Asp.Net.Identity, and Google Authenticator
 ================================
-The combination of [AngularJS Two Factor Authentication using ASP.NET Web API and Google Authenticator](/tjoudeh/AngularJSTwoFactorAuthentication) and [AngularJS Authentication](/tjoudeh/AngularJSAuthentication) 
+The combination of [AngularJS Two Factor Authentication](http://github.com/tjoudeh/AngularJSTwoFactorAuthentication) and [AngularJS Authentication](http://github.com/tjoudeh/AngularJSAuthentication) 
 
 ![Alt text](http://i.imgur.com/0jygYBM.png "AngularJS Authentication")
 ![Alt text](http://i.imgur.com/hAgzaMu.png "AngularJS Refresh Tokens")
