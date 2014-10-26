@@ -27,3 +27,9 @@ body { /* Margin bottom by footer height */
     margin-bottom: 5px !important;
     margin-top: 5px;
 }
+
+a { color: #CDE9FF }
+
+a:hover { color: #70A1C7 }
+
+.navbar-nav > li > a { font-size: 20px }

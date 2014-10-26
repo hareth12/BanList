@@ -1,9 +1,9 @@
-﻿namespace TwoFactorAuthentication.API.Controllers
+﻿namespace TwoFactorAuthentication.ResourceServer.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Web.Http;
-    using Filters;
+    using API.Filters;
 
     [Authorize]
     [RoutePrefix("api/Transactions")]

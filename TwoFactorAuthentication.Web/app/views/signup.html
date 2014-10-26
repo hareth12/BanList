@@ -1,9 +1,6 @@
 ﻿<form role="form">
     <div class="row">
-        <div class="col-md-1">
-            &nbsp;
-        </div>
-        <div class="col-md-5">
+        <div class="col-md-offset-1 col-md-5">
             <h2>Sign up</h2>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Username" data-ng-model="registration.userName" required autofocus>
@@ -22,7 +19,7 @@
                 {{message}}
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-offset-1 col-md-5">
             <h2>Authenticator Code</h2>
             <div class="text-info" ng-show="qrCode==''">Your Google Authenticator QR code will be displayed here after successful Signup!</div>
             <div ng-show="qrCode!=''">
@@ -33,9 +30,6 @@
                 <!--<a href="#/transhistory" class="btn btn-primary btn-md btn-block">View Transactions History</a>-->
             </div>
 
-        </div>
-        <div class="col-md-1">
-            &nbsp;
         </div>
     </div>
 </form>

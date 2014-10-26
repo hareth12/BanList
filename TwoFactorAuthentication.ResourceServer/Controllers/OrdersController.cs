@@ -1,4 +1,4 @@
-﻿namespace TwoFactorAuthentication.API.Controllers
+﻿namespace TwoFactorAuthentication.ResourceServer.Controllers
 {
     using System;
     using System.Collections.Generic;

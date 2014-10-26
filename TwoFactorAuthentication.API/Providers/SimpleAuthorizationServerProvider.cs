@@ -65,7 +65,8 @@
             }
 
             context.OwinContext.Set("as:clientAllowedOrigin", client.AllowedOrigin);
-            context.OwinContext.Set("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString(CultureInfo.InvariantCulture));
+            context.OwinContext.Set("as:clientRefreshTokenLifeTime",
+                client.RefreshTokenLifeTime.ToString(CultureInfo.InvariantCulture));
 
             context.Validated();
             return Task.FromResult<object>(null);
@@ -73,11 +74,11 @@
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "*";
+            string allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "*";
 
             if (!context.OwinContext.Response.Headers.ContainsKey("Access-Control-Allow-Origin"))
             {
-                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedOrigin});
             }
 
             ApplicationUser appUser;
