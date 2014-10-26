@@ -2,7 +2,7 @@
 app.factory('ordersService', [
     '$http', 'ngAuthSettings', function($http, ngAuthSettings) {
 
-        var serviceBase = ngAuthSettings.apiServiceBaseUri;
+        var serviceBase = ngAuthSettings.apiResourceBaseUri;
 
         var ordersServiceFactory = {};
 

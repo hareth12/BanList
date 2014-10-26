@@ -2,7 +2,7 @@
 app.factory('tokensManagerService', [
     '$http', 'ngAuthSettings', function($http, ngAuthSettings) {
 
-        var serviceBase = ngAuthSettings.apiServiceBaseUri;
+        var serviceBase = ngAuthSettings.apiAuthBaseUri;
 
         var tokenManagerServiceFactory = {};
 
