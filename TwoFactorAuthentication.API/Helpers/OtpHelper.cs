@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Net.Http;
-using TwoFactorAuthentication.API.Services;
-
-namespace TwoFactorAuthentication.API.Helpers
+﻿namespace TwoFactorAuthentication.API.Helpers
 {
+    using System.Linq;
+    using System.Net.Http;
+    using Services;
+
     public static class OtpHelper
     {
         private const string otpHeader = "X-OTP";

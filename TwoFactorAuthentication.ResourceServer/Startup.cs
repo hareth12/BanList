@@ -1,15 +1,15 @@
-﻿using System.Web.Http;
-using AngularJSAuthentication.ResourceServer;
-using AngularJSAuthentication.ResourceServer.App_Start;
-using Microsoft.Owin;
-using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security.OAuth;
-using Owin;
+﻿using Microsoft.Owin;
+using TwoFactorAuthentication.ResourceServer;
 
 [assembly: OwinStartup(typeof (Startup))]
 
-namespace AngularJSAuthentication.ResourceServer
+namespace TwoFactorAuthentication.ResourceServer
 {
+    using System.Web.Http;
+    using Microsoft.Owin.Cors;
+    using Microsoft.Owin.Security.OAuth;
+    using Owin;
+
     public class Startup
     {
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
@@ -17,7 +17,6 @@ namespace AngularJSAuthentication.ResourceServer
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
-
             ConfigureOAuth(app);
 
             WebApiConfig.Register(config);

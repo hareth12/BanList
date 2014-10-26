@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TwoFactorAuthentication.API.Models
+﻿namespace TwoFactorAuthentication.API.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class UserModel
     {
         [DataType(DataType.Password)]

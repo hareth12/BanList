@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Web.Http;
-
-namespace AngularJSAuthentication.ResourceServer.Controllers
+﻿namespace TwoFactorAuthentication.ResourceServer.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Web.Http;
+
     [Authorize]
     [RoutePrefix("api/protected")]
     public class ProtectedController : ApiController

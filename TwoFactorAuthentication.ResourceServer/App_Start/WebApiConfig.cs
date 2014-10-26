@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Net.Http.Formatting;
-using System.Web.Http;
-using Newtonsoft.Json.Serialization;
-
-namespace AngularJSAuthentication.ResourceServer.App_Start
+﻿namespace TwoFactorAuthentication.ResourceServer
 {
+    using System.Linq;
+    using System.Net.Http.Formatting;
+    using System.Web.Http;
+    using Newtonsoft.Json.Serialization;
+
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)

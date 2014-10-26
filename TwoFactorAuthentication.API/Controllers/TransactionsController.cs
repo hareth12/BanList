@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
-using TwoFactorAuthentication.API.Filters;
-
-namespace TwoFactorAuthentication.API.Controllers
+﻿namespace TwoFactorAuthentication.API.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Http;
+    using Filters;
+
     [Authorize]
     [RoutePrefix("api/Transactions")]
     public class TransactionsController : ApiController

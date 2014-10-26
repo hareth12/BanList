@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-
-namespace TwoFactorAuthentication.API.Services
+﻿namespace TwoFactorAuthentication.API.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Security.Cryptography;
+
     public static class TimeSensitivePassCode
     {
         public static string GeneratePresharedKey()
@@ -46,13 +47,13 @@ namespace TwoFactorAuthentication.API.Services
                                 | ((hash[offset + 2] & 0xff) << 8) | (hash[offset + 3] & 0xff);
 
             int hotp = truncatedHash%1000000;
-            return hotp.ToString().PadLeft(6, '0');
+            return hotp.ToString(CultureInfo.InvariantCulture).PadLeft(6, '0');
         }
     }
 
     public static class StringHelper
     {
-        private const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+        private const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
         public static string ToBase32String(this IEnumerable<byte> secret)
         {
@@ -60,7 +61,7 @@ namespace TwoFactorAuthentication.API.Services
 
             return
                 Enumerable.Range(0, bits.Length/5)
-                    .Select(i => Alphabet.Substring(Convert.ToInt32(bits.Substring(i*5, 5), 2), 1))
+                    .Select(i => alphabet.Substring(Convert.ToInt32(bits.Substring(i*5, 5), 2), 1))
                     .Aggregate((a, b) => a + b);
         }
 
@@ -69,7 +70,7 @@ namespace TwoFactorAuthentication.API.Services
             string bits =
                 secret.ToUpper()
                     .ToCharArray()
-                    .Select(c => Convert.ToString(Alphabet.IndexOf(c), 2).PadLeft(5, '0'))
+                    .Select(c => Convert.ToString(alphabet.IndexOf(c), 2).PadLeft(5, '0'))
                     .Aggregate((a, b) => a + b);
 
             return
